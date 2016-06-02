@@ -122,7 +122,7 @@ var AppComponent = React.createClass({
 	},
 
 	//组件加载以后，为每张图片计算其位置的范围
-	componentDidMount: function(){	
+	componentDidMount: function(){
 
 		//首先拿到舞台的大小
 		var stageDOM = ReactDOM.findDOMNode(this.refs.stage),
@@ -288,7 +288,7 @@ var AppComponent = React.createClass({
 			}
 
 			//将每张图片的React对象添加数组imgFigures中
-			imgFigures.push(<ImgFigure data={value} ref={'imgFigure' + index} arrange={this.state.imgsArrangeArr[index]} inverse={this.inverse(index)} center={this.center(index)}/>);
+			imgFigures.push(<ImgFigure key={index} data={value} ref={'imgFigure' + index} arrange={this.state.imgsArrangeArr[index]} inverse={this.inverse(index)} center={this.center(index)}/>);
 
 		}.bind(this));
 
