@@ -86,6 +86,37 @@ function get30DegRandom(){
 }
 
 
+//控制组件
+var ControllerUnit = React.createClass({
+	handleClick: function(e){
+		if(this.props.arrange.isCenter){
+			this.props.inverse();
+		}else{
+			this.props.center();
+		}
+
+		e.preventDefault();
+		e.stopPropagation();
+	},
+
+	render: function(){
+		var controllerUnitsClassName = 'controller-unit';
+
+		if(this.props.arrange.isCenter){
+			controllerUnitsClassName += ' center';
+
+			if(this.props.arrange.isInverse){
+				controllerUnitsClassName += ' inverse';
+			}
+		}
+
+		return (
+			<span className={controllerUnitsClassName} onClick={this.handleClick}></span>
+		);
+	}
+});
+
+
 var AppComponent = React.createClass({
 	Constant: {
 		centerPos: {  //中心图片
@@ -178,7 +209,7 @@ var AppComponent = React.createClass({
 			vPosRangeX = vPosRange.x,
 
 			imgsArrangeTopArr = [],
-			topImgNum = Math.ceil(Math.random() * 2), //上区域取一张或者不取图片
+			topImgNum = Math.floor(Math.random() * 2), //上区域取一张或者不取图片
 			topImgSpliceIndex = 0,
 
 			//获取中心图片的位置信息
@@ -290,6 +321,8 @@ var AppComponent = React.createClass({
 			//将每张图片的React对象添加数组imgFigures中
 			imgFigures.push(<ImgFigure key={index} data={value} ref={'imgFigure' + index} arrange={this.state.imgsArrangeArr[index]} inverse={this.inverse(index)} center={this.center(index)}/>);
 
+			controllerUnits.push(<ControllerUnit key={index} arrange={this.state.imgsArrangeArr[index]} inverse={this.inverse(index)} center={this.center(index)} />);
+
 		}.bind(this));
 
 		return (
@@ -305,4 +338,4 @@ var AppComponent = React.createClass({
 	}
 });
 
-export default AppComponent;
+module.exports = AppComponent;
