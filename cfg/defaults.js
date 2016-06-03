@@ -51,6 +51,10 @@ module.exports = {
   port: dfltPort,
   getDefaultModules: getDefaultModules,
   postcss: function () {
-    return [];
+    return [
+      require('autoprefixer')({
+        browsers: ['last 2 versions', 'ie >= 8']
+      })
+    ];
   }
 };
